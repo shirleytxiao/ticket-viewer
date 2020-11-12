@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  h1= title
+  p Here are those tickets you asked to see.
+
+  // Wrapper
+  #wrapper
+
+    // TICKET INFO
+    #ticketInfo
+      h2 Ticket Info
+      p
+        strong Requester:
+        |  <span id='ticketInfoRequester'></span>
+        br
+        strong Last updated:
+        |  <span id='ticketInfoDate'></span>
+        br
+        strong Subject:
+        |  <span id='ticketInfoSubject'></span>
+        br
+        strong Content:
+        |  <span id='ticketInfoContent'></span>
+    // /TICKET INFO
+    // TICKET LIST
+    h2 Ticket List
+    #ticketList
+      table
+        thead
+          th Requester
+          th Subject
+          th Last updated
+        tbody
+    // /TICKET LIST
+  // /WRAPPER
