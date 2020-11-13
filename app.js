@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const fs = require('fs');
 
 // Mongo Database (for testing later)
 // call Monk module and give it basic config parameters (where DB lives, which DB to use (nodetest2))
@@ -15,7 +16,6 @@ var ticketsRouter = require('./routes/tickets');
 
 var app = express();
 
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -26,11 +26,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 // Make our MongoDB accessible to our router
-app.use(function(req,res,next){
-    req.db = db;
-    next();
-});
+// app.use(function(req,res,next){
+//     req.db = db;
+//     next();
+// });
 
 // Make our db accessible to our various http requests
 app.use('/', indexRouter);            // using the Index route and view for display purposes

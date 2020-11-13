@@ -26,7 +26,11 @@ curl https://stxiao.zendesk.com/api/v2/imports/tickets/create_many.json -v -u st
 	- NEED TO CHANGE: how table is populated (populateTable() function)
 		- line 33: "ticketListData = data;" sticks ALL of our ticket data into the array we established earlier (not recommended if dealing with thousands of tickets)
 
+- dummy mongodb data: 
+db.userlist.insert({'username' : 'test1','email' : 'test1@test.com','fullname' : 'Bob Smith','age' : 27,'location' : 'San Francisco','gender' : 'Male'})
 
+- Zendesk API request: get tickets
+GET /api/v2/tickets.json
 
 
 
