@@ -1,7 +1,7 @@
 // ticketlist data array for filling in info box
 var ticketListData = [];
 var url = '/tickets/ticketlist';
-// var url = 'https://stxiao.zendesk.com/api/v2/tickets.json';
+// var url = "https://stxiao.zendesk.com/api/v2/tickets.json";
 
 // DOM ready, functions on initial page load
 $(document).ready(function() {
@@ -18,6 +18,7 @@ function populateTable() {
 
   var tableItem = '';
 
+  // ORIGINAL USING TICKETS/TICKETLIST
   // jQuery AJAX call for JSON
   $.getJSON( url, function(data) {
 
@@ -42,6 +43,40 @@ function populateTable() {
     // put entire ticket item string into HTML table
     $('#ticketList table tbody').html(tableItem);
   });
+
+  // FETCH ATTEMPT 1 WITH REQUEST
+
+
+    // request({
+    //   url: url,
+    //   json: true,
+    //   headers : { 
+    //       "Authorization" : "Basic c3R4aWFvQGJlcmtlbGV5LmVkdTozNFR3aW5reTc5IQ=="
+    //   }
+    // }, function (error, response, data) {
+    //     if (error) {
+    //         console.log(error)
+    //     }
+    //     if (!error && response.statusCode === 200) {
+    //       for (i = 0; i < 100; i++) {
+    //         $.each(data, function(){
+    //           ticketListData.push(this[i]);
+      
+    //           tableItem += '<tr>';
+    //           tableItem += '<td><a href="#" class="linkshowticket" rel="' + this[i].requester_id + '" title="Show Details">' + this[i].requester_id + '</a></td>';
+    //           tableItem += '<td>' + this[i].subject + '</td>';
+    //           tableItem += '<td>' + this[i].updated_at + '</td>';
+    //           tableItem += '</tr>';
+    //         });
+    //       };
+      
+      
+    //       // put entire ticket item string into HTML table
+    //       $('#ticketList table tbody').html(tableItem);    
+    //     };
+    //   }
+    // )
+
 };
 
 // finds index of ticket to show

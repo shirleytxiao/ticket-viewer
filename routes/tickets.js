@@ -1,8 +1,10 @@
 var express = require('express');
 var router = express.Router();
-const fs = require('fs');
+const request = require('request');
+var data = '';
+// const fs = require('fs');
 
-let url = 'https://www.stxiao.zendesk.com/api/v2/tickets.json';
+var url = "https://www.stxiao.zendesk.com/api/v2/tickets.json";
 
 /* GET ticketlist. */
 
@@ -11,13 +13,32 @@ let url = 'https://www.stxiao.zendesk.com/api/v2/tickets.json';
 // for viewer, want to put in limits as to how much
 // data gets spewed out at one time, (e.g. pagination).
 
+request({
+  url: url,
+  json: true,
+  headers : { 
+      "Authorization" : "Basic c3R4aWFvQGJlcmtlbGV5LmVkdTozNFR3aW5reTc5IQ=="
+  }
+}, function (error, response, body) {
+    if (!error && response.statusCode === 200) {
+      data = JSON.stringify(body);  
+    }
+    if (error) {
+      console.log(error)
+    };
+  }
+)
 
 router.get('/ticketlist', (req, res) => {
 
-  fs.readFile('./tickets' + ".json", 'utf8', function (err, data) {
-      res.send(data);
-  });
+  res.send(data);
+  // fs.readFile('./tickets' + ".json", 'utf8', function (err, data) {
+  //     res.send(data);
+  // });
+
 });
+
+
 
 // router.get('/ticketlist', function(req, res) {
 //   // fetch data from database
