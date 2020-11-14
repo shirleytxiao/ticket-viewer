@@ -22,21 +22,47 @@ function populateTable() {
   $.getJSON( url, function(data) {
 
     // stick our ticket data array into a ticketlist variable in the global object
-    ticketListData = data;
+    // ticketListData = data;
+
 
     // for each item in our JSON, add a table row and cells to the item string
-    $.each(data, function(){
-      tableItem += '<tr>';
-      tableItem += '<td><a href="#" class="linkshowticket" rel="' + this[0].requester_id + '" title="Show Details">' + this[0].requester_id + '</a></td>';
-      tableItem += '<td>' + this[0].subject + '</td>';
-      tableItem += '<td>' + this[0].updated_at + '</td>';
-      tableItem += '</tr>';
-    });
+    for (i = 0; i < 100; i++) {
+      $.each(data, function(){
+        ticketListData.push(this[i]);
+
+        tableItem += '<tr>';
+        tableItem += '<td><a href="#" class="linkshowticket" rel="' + this[i].requester_id + '" title="Show Details">' + this[i].requester_id + '</a></td>';
+        tableItem += '<td>' + this[i].subject + '</td>';
+        tableItem += '<td>' + this[i].updated_at + '</td>';
+        tableItem += '</tr>';
+      });
+    };
+
 
     // put entire ticket item string into HTML table
     $('#ticketList table tbody').html(tableItem);
   });
 };
+
+// finds index of ticket to show
+function findTicket(allTickets, ticketID) {
+  // var confirmation = confirm(ticketID);
+  // var confirmation = confirm(JSON.stringify(allTickets[0], null, 4)); // {"requester_id" : 1, "assignee_id" : 5 ...}
+  // var confirmation = confirm(allTickets.length);
+
+  for (currTicket = 0; currTicket < allTickets.length; currTicket++) {
+    // var confirmation = confirm(JSON.stringify(currTicket, null, 4)); // {"requester_id" : 1, "assignee_id" : 5 ...}
+    // var confirmation = confirm(JSON.stringify(allTickets[currTicket], null, 4)); // {"requester_id" : 1, "assignee_id" : 5 ...}
+    // var confirmation = confirm(ticketID); // [object Object], [object Object], [object Object]
+
+    // var confirmation = confirm(allTickets[currTicket].indexOf(ticketID));
+    if (allTickets[currTicket].requester_id == ticketID) {
+      // return allTickets[currTicket].indexOf(ticketID);
+      return currTicket;
+    };
+  };
+};
+
 
 function showTicketInfo(event) {
 
@@ -45,17 +71,32 @@ function showTicketInfo(event) {
 
   // retrieve ticketname from link rel attribute
   var thisTicketName = $(this).attr('rel');
+  // var confirmation = confirm(thisTicketName); // 0 / 1 / 2 / 3 / 4 ...
 
-  // get index of object based on id value
-  var arrayPosition = ticketListData.map(function(arrayItem) { return arrayItem.ticketname; }).indexOf(thisTicketName);
+  // var confirmation = confirm(ticketListData); // [object Object], [object Object], [object Object] ...
+  // var confirmation = confirm(JSON.stringify(ticketListData[0], null, 4)); // {"requester_id" : 1, "assignee_id" : 5 ...}
+
+  // // get index of object based on id value
+  // var arrayPosition = ticketListData.map(function(arrayItem) {
+  //   // var confirmation = confirm(JSON.stringify(arrayItem, null, 4)); // [object Object] (x3)
+  //   // var confirmation = confirm(arrayItem.requester_id == thisTicketName);
+
+  //   return arrayItem.requester_id; 
+  // }).indexOf(thisTicketName);
+    // var confirmation = confirm(arrayPosition); // 0 / 1 / 2 / 3 / 4 ...
+
+    var arrayPosition = findTicket(ticketListData, thisTicketName);
+
 
   // get our ticket object
   var thisTicketObject = ticketListData[arrayPosition];
+  // var confirmation = confirm(arrayPosition);
+
 
   //populate info box
-  $('#ticketInfoRequester').text(thisTicketObject[0].requester_id);
-  $('#ticketInfoUpdatedAt').text(thisTicketObject[0].updated_at);
-  $('#ticketInfoSubject').text(thisTicketObject[0].subject);
-  $('#ticketInfoContent').text(thisTicketObject[0].description);
+  $('#ticketInfoRequester').text(thisTicketObject.requester_id);
+  $('#ticketInfoUpdatedAt').text(thisTicketObject.updated_at);
+  $('#ticketInfoSubject').text(thisTicketObject.subject);
+  $('#ticketInfoContent').text(thisTicketObject.description);
 
 };
