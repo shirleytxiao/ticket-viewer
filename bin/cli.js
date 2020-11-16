@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-CLIENT_DOMAIN = 'https://stxiao.zendesk.com';           // Enter Zendesk account domain here.
-CLIENT_ID = 'stxiao@berkeley.edu';                      // Enter account email here. 
-CLIENT_SECRET = 'donthackmeplz';                        // Enter account password here.
+CLIENT_DOMAIN = '';                  // Enter Zendesk account domain here. <'https://example.zendesk.com'>
+CLIENT_ID = '';                      // Enter account email here. <'example@abc.com'>
+CLIENT_SECRET = '';                  // Enter account password here. <'donthackmeplz'>
 
 
 
