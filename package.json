@@ -1,12 +1,19 @@
 {
   "name": "ticket-viewer",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "test": "node tests/request-test.js"
   },
   "dependencies": {
+    "ascii-art": "^2.5.0",
+    "asciiart-logo": "^0.2.6",
+    "axios": "^0.21.0",
+    "boxen": "^4.2.0",
+    "chalk": "^2.4.2",
     "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
     "express": "^4.16.4",
@@ -18,6 +25,11 @@
     "mongoose": "^5.10.14",
     "monk": "^7.1.2",
     "morgan": "~1.9.1",
-    "request": "^2.88.2"
+    "request": "^2.88.2",
+    "table": "^6.0.3",
+    "yargs": "^16.1.0"
+  },
+  "bin": {
+    "hello": "./bin/cli.js"
   }
 }

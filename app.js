@@ -5,12 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const fs = require('fs');
 
-// Mongo Database (for testing later)
-// call Monk module and give it basic config parameters (where DB lives, which DB to use (nodetest2))
-var mongo = require('mongodb');
-var monk = require('monk');
-var db = monk('localhost:27017/ticket-viewer');
-
 var indexRouter = require('./routes/index');
 var ticketsRouter = require('./routes/tickets');
 
@@ -26,16 +20,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-// Make our MongoDB accessible to our router
-// app.use(function(req,res,next){
-//     req.db = db;
-//     next();
-// });
-
 // Make our db accessible to our various http requests
-app.use('/', indexRouter);            // using the Index route and view for display purposes
-app.use('/tickets', ticketsRouter);   // using the Tickets route to set up our data I/O: the services we want to create to show tickets from our db
+app.use('/', indexRouter);
+app.use('/tickets', ticketsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -44,7 +31,6 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
