@@ -27,7 +27,7 @@ The browser-based app uses tickets from a local JSON file, instead of those requ
 1. Clone the repository: `git clone git@github.com:shirleytxiao/ticket-viewer`
 2. Install the application: `npm install`
 3. Enter your Zendesk account information in `bin/cli.js`
-4. Start the app: `hello`
+4. Start the app: `hello` or `./bin/cli.js`
 
 To avoid formatting issues, it is recommended to use the CLI on a full-screen terminal. 
 
@@ -43,8 +43,3 @@ To avoid formatting issues, it is recommended to use the CLI on a full-screen te
 ```sh
 npm tests
 ```
-
-
-## Author
-
-Shirley Xiao is an aspiring software engineer and second-year student at University of California, Berkeley. She is currently studying computer science.
